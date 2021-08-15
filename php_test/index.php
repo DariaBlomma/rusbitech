@@ -8,12 +8,14 @@
     };
     spl_autoload_register('autoloader');
 
-    // Classes\Task1::getConnection();
     $result = Classes\Task1::get();
     
-
-    // Classes\Task3::sayHi();
     $result2 = Classes\Task3::select();
 
-    include_once 'task1View.php';
+    
+
+    $task2 = new Classes\Task2();
+    $filtered = $task2->filter();
+    // var_dump($task2);
+    include_once 'view.php';
 ?>
