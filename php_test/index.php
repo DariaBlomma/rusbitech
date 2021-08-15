@@ -12,10 +12,7 @@
     
     $result2 = Classes\Task3::select();
 
-    
-
     $task2 = new Classes\Task2();
     $filtered = $task2->filter();
-    // var_dump($task2);
     include_once 'view.php';
 ?>
