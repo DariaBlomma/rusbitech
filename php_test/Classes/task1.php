@@ -1,24 +1,32 @@
 <?php
     namespace Classes;
 
-    final class Task1 {
+    final class Task1 extends Db {
         private static $connection = null;
-        private static $stmt;
+        private static $count = 0;
 
-        public static function getConnection() {
-            $config = include_once('./dbConfig.php');
-            // Check is $_instance has been set
-            if (!self::$connection) {
-                try {
-                    self::$connection = new \PDO('mysql:host=' .$config['host'] .';dbname=' .$config['dbName'] , $config['user'], $config['password']);
-                    self::create();
-                    self::fill();  
-                } catch (PDOException $e) {
-                    die($e->getMessage());
-                }
-            }
-            // Returns the instance
-            return self::$connection;
+        // public static function getConnection() {
+        //     $config = include_once('./dbConfig.php');
+        //     // Check is $_instance has been set
+        //     if (!self::$connection) {
+        //         try {
+        //             self::$connection = new \PDO('mysql:host=' .$config['host'] .';dbname=' .$config['dbName'] , $config['user'], $config['password']);
+        //             self::create();
+        //             self::fill();  
+        //         } catch (PDOException $e) {
+        //             die($e->getMessage());
+        //         }
+        //     }
+        //     // Returns the instance
+        //     return self::$connection;
+        // }
+
+        
+        public function __construct() {
+            self::$count++;
+            parent::getConnection();
+            self::create();
+            self::fill(); 
         }
 
         private static function create() {

@@ -7,7 +7,13 @@
         }
     };
     spl_autoload_register('autoloader');
-    $db = Classes\Task1::getConnection();
+
+    // Classes\Task1::getConnection();
     $result = Classes\Task1::get();
+    
+
+    // Classes\Task3::sayHi();
+    $result2 = Classes\Task3::select();
+
     include_once 'task1View.php';
 ?>

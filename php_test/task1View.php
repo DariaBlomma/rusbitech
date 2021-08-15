@@ -33,5 +33,18 @@
         </tr>
         <?php endforeach; ?>
     </table>
+    <h1>Task 3 </h1>
+    <table>
+        <tr>
+            <th>Book name</th>
+            <th>Authors number</th>
+        </tr>
+        <?php foreach($result2 as $row2): ?>
+        <tr>
+            <td><?= $row2['book_name'] ?></td>
+            <td><?= $row2['amount'] ?></td>
+        </tr>
+        <?php endforeach; ?>
+    </table>
 </body>
 </html>
