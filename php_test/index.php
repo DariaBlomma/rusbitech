@@ -8,4 +8,6 @@
     };
     spl_autoload_register('autoloader');
     $db = Classes\Task1::getConnection();
+    $result = Classes\Task1::get();
+    include_once 'task1View.php';
 ?>
