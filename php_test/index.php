@@ -8,6 +8,7 @@
     };
     spl_autoload_register('autoloader');
 
+    Classes\Task1::getInstance();
     $result = Classes\Task1::get();
     
     $result2 = Classes\Task3::select();

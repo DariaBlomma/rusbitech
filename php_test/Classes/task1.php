@@ -3,30 +3,20 @@
 
     final class Task1 extends Db {
         private static $connection = null;
-        private static $count = 0;
+        private static $instance = null;
 
-        // public static function getConnection() {
-        //     $config = include_once('./dbConfig.php');
-        //     // Check is $_instance has been set
-        //     if (!self::$connection) {
-        //         try {
-        //             self::$connection = new \PDO('mysql:host=' .$config['host'] .';dbname=' .$config['dbName'] , $config['user'], $config['password']);
-        //             self::create();
-        //             self::fill();  
-        //         } catch (PDOException $e) {
-        //             die($e->getMessage());
-        //         }
-        //     }
-        //     // Returns the instance
-        //     return self::$connection;
-        // }
-
-        
-        public function __construct() {
-            self::$count++;
-            parent::getConnection();
-            self::create();
-            self::fill(); 
+        public static function getInstance() {
+            if (!self::$instance) {
+                try {
+                    self::$instance = parent::getConnection();
+                    self::create();
+                    self::fill();  
+                } catch (PDOException $e) {
+                    die($e->getMessage());
+                }
+            }
+            // Returns the instance
+            return self::$instance;
         }
 
         private static function create() {
