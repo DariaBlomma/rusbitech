@@ -1,0 +1,182 @@
+* {
+    font-family: Arial, sans-serif;
+}
+
+div {
+    border: 1px solid black;
+}
+
+.calc-wrapper {
+    display: grid;
+    grid-template-areas: 'calc history';
+    
+}
+
+.calc {
+    grid-area: calc;
+    margin: 10px;
+    border-radius: 10px;
+    border-color:#686868;
+    min-height: 400px;
+    min-width: 300px;
+    font-size: 30px;
+    display: grid;
+    grid-template-areas: 
+    'output output output output'
+    'output output output output'
+    'ac plusMinus percent delete'
+    'seven eight nine multiply'
+    'four five six minus'
+    'one two three plus'
+    'zero zero comma equals';
+}
+
+.output {
+    grid-area: output;
+    display: flex;
+    justify-content: space-between;
+    padding: 5px;
+    background-color: #999999;
+    border-color: #999999;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    color: white;
+}
+
+.circles {
+    display: flex;
+    border: none;
+    justify-content: space-around;
+}
+
+.dot {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    margin: 5px;
+    border: none;
+}
+
+.red {
+    background-color: #ff5554;
+}
+
+.yellow {
+    background-color: #ffbd51;
+}
+
+.green {
+    background-color: #1ccd5b;
+}
+
+.output-text {
+    align-self: flex-end;
+    font-size: 50px;
+    margin-right: 10px;
+}
+
+.btn {
+    background-color: #d6d6d6;
+    border-color: #999999;
+}
+
+.highlighted {
+    background-color: #f89148;
+    color: white;
+}
+
+
+.ac {
+    grid-area: ac;
+}
+
+.plus-minus {
+    grid-area: plusMinus;
+}
+
+.percent {
+    grid-area: percent;
+}
+
+.delete {
+    grid-area: delete;
+}
+
+.seven {
+    grid-area: seven;
+}
+
+.eight {
+    grid-area: eight;
+}
+
+.nine {
+    grid-area: nine;
+}
+
+.multiply {
+    grid-area: multiply;
+}
+
+.four {
+    grid-area: four;
+}
+
+.five {
+    grid-area: five;
+}
+
+.six {
+    grid-area: six;
+}
+
+.minus {
+    grid-area: minus;
+}
+
+.one {
+    grid-area: one;
+}
+
+.two {
+    grid-area: two;
+}
+
+.three {
+    grid-area: three;
+}
+
+.plus {
+    grid-area: plus;
+}
+
+.zero {
+    grid-area: zero;
+}
+
+.comma {
+    grid-area: comma;
+}
+
+.equals {
+    grid-area: equals;
+}
+
+
+.history {
+    grid-area: history;
+    padding: 10px;
+    border: none;
+    border-left: 1px solid black;
+}
+
+.history-list {
+    list-style-type: none;
+    padding: 0;
+}
+
+.centered {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
