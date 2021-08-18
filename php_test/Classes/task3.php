@@ -1,7 +1,7 @@
 <?php
     namespace Classes;
 
-    class Task3 extends Db {
+    class Task3 extends Db{
         private static $connection = null;
 
         private static function create() {

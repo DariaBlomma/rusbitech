@@ -1,7 +1,7 @@
 <?php
     namespace Classes;
 
-    final class Task1 extends Db {
+    final class Task1 extends Db{
         private static $connection = null;
         private static $instance = null;
 
