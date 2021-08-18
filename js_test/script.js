@@ -15,7 +15,7 @@ const workCalculator = () => {
     let number;
     let expr = '';
     const count = (string, num1, action, num2) => {
-        // console.log(string, num1,  action, num2)
+        console.log(string, num1,  action, num2)
         switch (action) {
             case '÷' :
                 return num1 / num2;
@@ -29,19 +29,41 @@ const workCalculator = () => {
         // return 
     };
 
+    const cleanInput = () => {
+        clicks = 0;
+        expr = '';
+    };
+
     const check = string => {
-        return string.length === 0 ||
+        // проверяем, что это не число со знаком, а просто знак без числа
+        const strStart = /[-+](?![0-9]+)/,
+            notNumber = /÷0/;
+        if (notNumber.test(string)) {
+            console.log(1);
+            cleanInput();
+            outputText.textContent = 'не число';
+            return false;
+        } else if (string.length === 0 ||
             string[0] === '%' ||
             string[0] === '÷' ||
             string[0] === '×' ||
-            string[0] === '-' ||
-            string[0] === '+' ||
-            string[0] === ',' ;
+            strStart.test(string) ||
+            string[0] === ',' ) {
+            cleanInput();
+            outputText.textContent = 'Ошибка';
+            return false;
+        } else {
+            return true;
+        }
     };
 
     const parse = string => {
-        const priorities = string.replace(/([0-9]+)([÷×])([0-9]+)/g, count);
-        const usual = priorities.replace(/([0-9]+)([+-])([0-9]+)/g, count)
+        // продумать обработку запятой и точки
+        const percent = string.replace(/(-?[0-9]+)%/g, (match, number)=> number / 100);
+        const priorities = percent.replace(/-?([0-9]*[\.,]?[0-9]+)([÷×])(-?[0-9]*[\.,]?[0-9]+)/g, count);
+        // console.log('priorities: ', priorities);
+        const usual = priorities.replace(/-?([0-9]*[\.,-]?[0-9]+)([+-])(-?[0-9]*[\.,]?[0-9]+)/g, count);
+        // console.log('usual: ', usual);
         return usual;
     };
 
@@ -51,25 +73,49 @@ const workCalculator = () => {
         historyList.append(li);
     };
 
+    const signReplacer = match => {
+        const reg = /(-?[0-9]+)(-[0-9]+)$/;
+        // проверяем, нужно ли написать явный +
+        const minusCheck = reg.test(expr);
+        if (parseFloat(match) > 0) {
+            return `-${match}`;
+        }
+        if (parseFloat(match) < 0) {
+            if (minusCheck) {
+                return `+${match * -1}`;
+            } else {
+                return match * -1;
+            } 
+        }
+    };
+
+    const percentReplacer = match => {
+        // return match / 100;
+        console.log('match / 100: ', match / 100);
+    };
+
     document.addEventListener('click', event => {
         const target = event.target;
         if (!target.classList.contains('btn')) {
             return;
         }
-
+        console.log('expr: ', expr);
         clicks++;
-        if (clicks === 1) {
-            outputText.textContent = '';
+        
+        if (clicks === 1 ) {
+            // если клик по цифре - убрать 0, если по оператору - оставить
+            if (target.classList.contains('number')) {
+                outputText.textContent = '';
+            } else {
+                expr = 0;
+            }
         }   
         
+
         // при клике на равно
         if (target.classList.contains('equals')) {
+            // если прошли проверку и нет ошибок
             if (check(expr)) {
-                outputText.textContent = 'Ошибка';
-                // outputText.classList.add('error');
-                clicks = 0;
-                expr = '';
-            } else {       
                 const result = parse(expr);
                 outputText.textContent = result;
                 const date = new Date();
@@ -79,12 +125,23 @@ const workCalculator = () => {
                 historyArr.push(historyLine);
                 renderHistory(historyLine);
                 localStorage.setItem('historyList', JSON.stringify(historyArr));
-                expr = '';
-                clicks = 0;
-                console.log('historyArr', historyArr);
+                expr = outputText.textContent;
             }
+        } else if (target.classList.contains('ac')) {
+            outputText.textContent = 0;
+            clicks = 0;
+            expr = '';
+            historyArr = [];
+            localStorage.removeItem('historyList');
+            historyList.textContent = '';
+        } else if (target.classList.contains('plus-minus')) {
+            // делаем последнее число положительным или отрицаетльным
+            // ошибка - может оставиться 0 или убратьмя минус и не добавиться + (-96)
+            expr = expr.replace(/-?([0-9]+)$/, signReplacer);
+            outputText.textContent = expr;
+            console.log('expr: ', expr);
         } else {
-            expr += target.textContent;
+            expr += target.textContent;            
             outputText.innerHTML += target.textContent;
         }
     });
