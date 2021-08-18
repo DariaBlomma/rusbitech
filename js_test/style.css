@@ -1,5 +1,6 @@
 * {
-    font-family: Arial, sans-serif;
+    /* font-family: Arial, sans-serif; */
+    font-family: 'Roboto', sans-serif;
 }
 
 div {
@@ -24,7 +25,7 @@ div {
     grid-template-areas: 
     'output output output output'
     'output output output output'
-    'ac plusMinus percent delete'
+    'ac plusMinus percent divide'
     'seven eight nine multiply'
     'four five six minus'
     'one two three plus'
@@ -73,6 +74,7 @@ div {
     align-self: flex-end;
     font-size: 50px;
     margin-right: 10px;
+    font-weight: 100;
 }
 
 .btn {
@@ -80,11 +82,26 @@ div {
     border-color: #999999;
 }
 
+.btn:hover {
+    background-color: #e8e7e7;
+}
+
+.btn:active {
+    background-color: #bababa;
+}
+
 .highlighted {
     background-color: #f89148;
     color: white;
 }
 
+.highlighted:hover {
+    background-color: #f8b17f;
+}
+
+.highlighted:active {
+    background-color: #ff6a00;
+}
 
 .ac {
     grid-area: ac;
@@ -98,8 +115,8 @@ div {
     grid-area: percent;
 }
 
-.delete {
-    grid-area: delete;
+.divide {
+    grid-area: divide;
 }
 
 .seven {
@@ -179,4 +196,8 @@ div {
     display: flex;
     justify-content: center;
     align-items: center;
+}
+
+.error {
+    color: #ff5554;
 }
