@@ -109,7 +109,6 @@ const workCalculator = () => {
     getSavedHistory = (savedArr, tempArr) => {
         if (savedArr && savedArr.length > tempArr.length) {
             tempArr = savedArr;
-            console.log('2tempArr: ', tempArr);
             savedArr.forEach(item => {
                 renderHistory(item);
             });
