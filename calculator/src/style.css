@@ -79,6 +79,19 @@ div {
     font-weight: 100;
     margin-left: auto;
     max-width: 100%;
+    background-color: transparent;
+    width: 90%;
+    color: white;
+    text-align: right;
+    border: none;
+}
+
+.output-text::-webkit-input-placeholder {color:white;}
+.output-text::-moz-placeholder {color:white;}
+
+.output-text:focus {
+    border: none;
+    outline: none;
 }
 
 .btn {
