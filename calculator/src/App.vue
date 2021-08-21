@@ -1,5 +1,5 @@
 <template>
-  <div id="app">->
+  <div id="app">
         <div class='calc-wrapper'>
         <div ref='calc' class='calc'>
             <div class='output'>
