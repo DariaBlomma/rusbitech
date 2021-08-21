@@ -2,6 +2,7 @@
 
 * {
     font-family: 'Roboto', sans-serif;
+    box-sizing: border-box;
 }
 
 div {
@@ -71,6 +72,18 @@ div {
 .green {
     background-color: #1ccd5b;
 }
+.outputText-wrapper {
+    border: none;
+    display: flex;
+    max-width: 280px;
+}
+span {
+    font-weight: 100;
+    font-size: 50px;
+    text-align: right;
+    position: absolute;
+    z-index: -1;
+}
 
 .output-text {
     align-self: flex-end;
@@ -78,12 +91,17 @@ div {
     margin-right: 10px;
     font-weight: 100;
     margin-left: auto;
-    max-width: 100%;
     background-color: transparent;
-    width: 90%;
     color: white;
     text-align: right;
     border: none;
+}
+
+.startWidth {
+    min-width: 90%;
+}
+.autoWidth {
+    width: auto;
 }
 
 .output-text::-webkit-input-placeholder {color:white;}
@@ -186,6 +204,7 @@ div {
 
 .zero {
     grid-area: zero;
+    border-bottom-left-radius: 10px;
 }
 
 .comma {
@@ -194,6 +213,7 @@ div {
 
 .equals {
     grid-area: equals;
+    border-bottom-right-radius: 10px;
 }
 
 
@@ -227,6 +247,12 @@ div {
     overflow-y: scroll;
 }
 
+.d-none {
+    display: none;
+}
+
+
+
 @media(max-width: 500px) {
     .calc-wrapper {
         grid-template-areas: 
@@ -238,15 +264,21 @@ div {
     .history {
         border-left: none;
         border-top: 1px solid black;
+        max-width: 95%;
+        padding: 0;
+        margin: 3px;
+        padding-left: 5px;
+        justify-self: center;
     }
 
     .calc {
         justify-self: center;
+        margin: 3px;
     }
 }
 
-@media(max-width: 500px) {
+@media(max-width: 320px) {
     .calc {
-        width: 270px;
+        width: fit-content;
     }
 }

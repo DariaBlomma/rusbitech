@@ -1,21 +1,23 @@
 <template>
-  <div id="app">
-    <!-- <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/> -->
+  <div id="app">->
         <div class='calc-wrapper'>
-        <div class='calc'>
+        <div ref='calc' class='calc'>
             <div class='output'>
+              <span ref='span'>{{expr}}</span>
                 <div class='circles'>
                     <div class='dot red'></div>
                     <div class='dot yellow'></div>
                     <div class='dot green'></div>
                 </div>
+                <div :class="['outputText-wrapper', {'x-scroll': xScroll}]">
                   <input 
                     type='text' 
                     placeholder='0' 
-                    :class="['output-text', {'x-scroll': xScroll}]" 
+                    :class="['output-text', {'startWidth': !xScroll, 'autoWidth': xScroll}]" 
                     v-model='expr'
+                    ref='outputInput'
                   >
+                </div>
             </div>
             <div 
               v-for='number in numbers' :key='number.value'
@@ -42,7 +44,7 @@
             <div class='plus-minus btn centered'  @click='toggleSign'>+/-</div>
             <div class='equals btn highlighted  centered' @click='count'>=</div>
         </div>
-        <div class='history'>
+        <div ref='historyList' :class="['history', {'y-scroll': yScroll}]">
             <h3>История операций</h3>
             <ul class='history-list'>
               <li v-for='item, index in historyArr' :key='index'>{{item}}</li>
@@ -53,14 +55,8 @@
 </template>
 
 <script>
-// import HelloWorld from './components/HelloWorld.vue'
-
 export default {
   name: 'App',
-
-  // components: {
-  //   HelloWorld
-  // }
   data(){
     return {
       numbers: [
@@ -124,14 +120,6 @@ export default {
         },
       ],
       various: [
-        // {
-        //   value: 'AC',
-        //   class: 'ac',
-        // },
-        // {
-        //   value: '+/-',
-        //   class: 'plus-minus',
-        // },
         {
           value: '%',
           class: 'percent',
@@ -156,9 +144,8 @@ export default {
       }
       this.restart = false; 
       this.expr += val;
-      // 270 и 430 при полном экране
-        // addScroll(outputText, 'x', calcElem.clientWidth - calcElem.clientWidth * 0.1);
-      // addScroll(historyElem, 'y', calcElem.clientHeight);
+      // 270 при полном экране
+      this.xScroll = this.addScroll(this.$refs.span, 'x', this.$refs.calc.clientWidth - this.$refs.calc.clientWidth * 0.1);
     },
     countPercent(string, num1, action, num2) {  
         num2 = num1 * num2 / 100;
@@ -251,26 +238,22 @@ export default {
           const historyLine = this.prepareHistoryInfo(this.result)
           this.historyArr.push(historyLine);       
           this.saveHistory();
+          //430 при полном экране
+          this.yScroll = this.addScroll(this.$refs.historyList, 'y', this.$refs.calc.clientHeight);
           this.expr = this.result;
       } else {
         this.restart = true;
       }
     },
-    addScrol(elem, direction, size) {
-        let condition,
-            classToAdd;
+    addScroll(scrollledElem, direction, maxSize) {
+        let condition;
         if (direction === 'x') {
-            condition = elem.clientWidth > size;
-            classToAdd
+            condition = scrollledElem.clientWidth >= maxSize;
         } else {
-            condition = elem.clientHeight > size;
+            condition = scrollledElem.clientHeight >= maxSize;
         }
 
-        if (condition) {
-            elem.classList.add(`${direction}-scroll`);
-        } else {
-            elem.classList.remove(`${direction}-scroll`);
-        }
+        return condition ? true : false;
     }
   },
   computed: {
@@ -278,6 +261,9 @@ export default {
   },
   created() {
     this.historyArr = this.getSavedHistory(JSON.parse(localStorage.getItem('historyList')), this.historyArr);
+  },
+  mounted() {
+    this.yScroll = this.addScroll(this.$refs.historyList, 'y', this.$refs.calc.clientHeight);
   }
 }
 </script>
