@@ -1,0 +1,284 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100;400&display=swap');
+
+* {
+    font-family: 'Roboto', sans-serif;
+    box-sizing: border-box;
+}
+
+div {
+    border: 1px solid black;
+}
+
+.calc-wrapper {
+    display: grid;
+    grid-template-areas: 'calc history';
+    height: 450px;
+}
+
+.calc {
+    grid-area: calc;
+    margin: 10px;
+    border-radius: 10px;
+    border-color:#686868;
+    width: 300px;
+    height: 430px;
+    font-size: 30px;
+    display: grid;
+    grid-template-areas: 
+    'output output output output'
+    'output output output output'
+    'ac plusMinus percent divide'
+    'seven eight nine multiply'
+    'four five six minus'
+    'one two three plus'
+    'zero zero comma equals';
+}
+
+.output {
+    grid-area: output;
+    padding: 5px;
+    background-color: #999999;
+    border-color: #999999;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    color: white;
+    position: relative;
+    display: grid;
+}
+
+.circles {
+    display: flex;
+    border: none;
+    justify-content: space-around;
+    position: absolute;
+}
+
+.dot {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    margin: 5px;
+    border: none;
+}
+
+.red {
+    background-color: #ff5554;
+}
+
+.yellow {
+    background-color: #ffbd51;
+}
+
+.green {
+    background-color: #1ccd5b;
+}
+.outputText-wrapper {
+    border: none;
+    display: flex;
+    max-width: 280px;
+}
+span {
+    font-weight: 100;
+    font-size: 50px;
+    text-align: right;
+    position: absolute;
+    z-index: -1;
+}
+
+.output-text {
+    align-self: flex-end;
+    font-size: 50px;
+    margin-right: 10px;
+    font-weight: 100;
+    margin-left: auto;
+    background-color: transparent;
+    color: white;
+    text-align: right;
+    border: none;
+}
+
+.startWidth {
+    min-width: 90%;
+}
+.autoWidth {
+    width: auto;
+}
+
+.output-text::-webkit-input-placeholder {color:white;}
+.output-text::-moz-placeholder {color:white;}
+
+.output-text:focus {
+    border: none;
+    outline: none;
+}
+
+.btn {
+    background-color: #d6d6d6;
+    border-color: #999999;
+}
+
+.btn:hover {
+    background-color: #e8e7e7;
+}
+
+.btn:active {
+    background-color: #bababa;
+}
+
+.highlighted {
+    background-color: #f89148;
+    color: white;
+}
+
+.highlighted:hover {
+    background-color: #f8b17f;
+}
+
+.highlighted:active {
+    background-color: #ff6a00;
+}
+
+.ac {
+    grid-area: ac;
+}
+
+.plus-minus {
+    grid-area: plusMinus;
+}
+
+.percent {
+    grid-area: percent;
+}
+
+.divide {
+    grid-area: divide;
+}
+
+.seven {
+    grid-area: seven;
+}
+
+.eight {
+    grid-area: eight;
+}
+
+.nine {
+    grid-area: nine;
+}
+
+.multiply {
+    grid-area: multiply;
+}
+
+.four {
+    grid-area: four;
+}
+
+.five {
+    grid-area: five;
+}
+
+.six {
+    grid-area: six;
+}
+
+.minus {
+    grid-area: minus;
+}
+
+.one {
+    grid-area: one;
+}
+
+.two {
+    grid-area: two;
+}
+
+.three {
+    grid-area: three;
+}
+
+.plus {
+    grid-area: plus;
+}
+
+.zero {
+    grid-area: zero;
+    border-bottom-left-radius: 10px;
+}
+
+.comma {
+    grid-area: comma;
+}
+
+.equals {
+    grid-area: equals;
+    border-bottom-right-radius: 10px;
+}
+
+
+.history {
+    grid-area: history;
+    padding: 10px;
+    border: none;
+    border-left: 1px solid black;
+}
+
+.history-list {
+    list-style-type: none;
+    padding: 0;
+}
+
+.centered {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.error {
+    color: #ff5554;
+}
+
+.x-scroll {
+    overflow-x: scroll;
+}
+
+.y-scroll {
+    overflow-y: scroll;
+}
+
+.d-none {
+    display: none;
+}
+
+
+
+@media(max-width: 500px) {
+    .calc-wrapper {
+        grid-template-areas: 
+            'calc' 
+            ' history';
+        height: 900px;
+    }
+
+    .history {
+        border-left: none;
+        border-top: 1px solid black;
+        max-width: 95%;
+        padding: 0;
+        margin: 3px;
+        padding-left: 5px;
+        justify-self: center;
+    }
+
+    .calc {
+        justify-self: center;
+        margin: 3px;
+    }
+}
+
+@media(max-width: 320px) {
+    .calc {
+        width: fit-content;
+    }
+}
