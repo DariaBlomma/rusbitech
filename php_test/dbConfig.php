@@ -5,3 +5,10 @@ return array(
     'user' => 'root',
     'password' => 'root'
 );
+// для хостинга
+// return array(
+//     'host' => 'localhost',
+//     'dbName' => 'f0497458_avengers',
+//     'user' => 'f0497458_root',
+//     'password' => 'root'
+// );

@@ -112,7 +112,7 @@
                 books.book_name,
                 COUNT(*) AS amount
                 FROM books_authors
-                JOIN books ON books_authors.book_id = books.book_id
+                LEFT JOIN books ON books_authors.book_id = books.book_id
                 GROUP BY books_authors.book_id
                 HAVING amount > 3
                 ORDER BY amount DESC
